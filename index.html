@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polizia Teletubbyland - Archivio Segreto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e94560;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: rgba(0,0,0,0.7);
+            border: 3px solid #e94560;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: flicker 3s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .subtitle {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .login-section {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #e94560;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.3);
+        }
+        
+        .login-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e94560;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #0f3460;
+            border: 2px solid #e94560;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+        }
+        
+        .btn {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #ff6b6b;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin-top: 15px;
+            color: #ff6b6b;
+            display: none;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .evidence-card {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #e94560;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+        }
+        
+        .evidence-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #e94560;
+            padding-bottom: 10px;
+        }
+        
+        .evidence-card p {
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        .evidence-card ul {
+            margin-left: 20px;
+            color: #ddd;
+        }
+        
+        .evidence-card li {
+            margin-bottom: 8px;
+        }
+        
+        .classified {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid #e94560;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .warning-banner {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        .pumpkin {
+            font-size: 2em;
+            animation: spin 10s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="pumpkin">🎃</div>
+            <h1>🚨 Polizia di Teletubbyland 🚨</h1>
+            <p class="subtitle">Dipartimento Investigativo - Archivio Digitale Segreto</p>
+            <p class="subtitle">CASO #1031 - OMICIDIO HALLOWEEN</p>
+        </header>
+        
+        <div id="loginSection" class="login-section">
+            <h2>🔐 ACCESSO RISERVATO</h2>
+            <p style="color: #ddd; margin-bottom: 20px;">
+                Questo archivio è riservato al personale autorizzato e ai consulenti esterni assegnati al caso #1031.
+                Inserisci le credenziali fornite dal Detective Angelo Gallo.
+            </p>
+            
+            <div class="input-group">
+                <label for="username">USERNAME:</label>
+                <input type="text" id="username" placeholder="Inserisci username">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">PASSWORD:</label>
+                <input type="password" id="password" placeholder="Inserisci password">
+            </div>
+            
+            <button class="btn" onclick="login()">ACCEDI ALL'ARCHIVIO</button>
+            
+            <div id="errorMsg" class="error">
+                ❌ ACCESSO NEGATO - Credenziali non valide
+            </div>
+            
+            <p class="timestamp" style="margin-top: 20px;">
+                💡 SUGGERIMENTO: La password si trova nella poesia sul retro della lettera del Detective Gallo
+            </p>
+        </div>
+        
+        <div id="contentSection" class="content-section">
+            <div class="warning-banner">
+                ⚠️ ATTENZIONE: MATERIALE ALTAMENTE CONFIDENZIALE ⚠️<br>
+                Divulgazione non autorizzata punibile ai sensi della legge
+            </div>
+            
+            <div class="evidence-card">
+                <h3>📹 VIDEO SORVEGLIANZA - ESTRATTI</h3>
+                <p><strong>Fonte:</strong> Sistema di sicurezza Casa Teletubbies</p>
+                <p><strong>Data:</strong> 31 Ottobre 2025</p>
+                <div class="classified">
+                    <strong>NOTA INVESTIGATIVA:</strong> Le telecamere della casa hanno registrato tutto fino alle 22:30, quando qualcuno ha disattivato il sistema durante il "gioco al buio". Il sistema è stato riattivato solo alle 00:03, dopo la scoperta del corpo.
+                </div>
+                <p><strong>Sequenze rilevanti registrate:</strong></p>
+                <ul>
+                    <li><strong>20:15</strong> - Tutti gli invitati arrivano in costume</li>
+                    <li><strong>20:47</strong> - Po e Baby Sun iniziano a litigare animatamente in cucina</li>
+                    <li><strong>21:36</strong> - Tinky Winky esce dalla stanza principale, si dirige verso il corridoio</li>
+                    <li><strong>22:02</strong> - Laa-Laa apre la porta della cantina, guarda dentro per alcuni secondi, poi la richiude</li>
+                    <li><strong>22:29</strong> - ULTIMA IMMAGINE: Tutti nel soggiorno. Luci che si spengono.</li>
+                    <li><strong>22:30 - 00:03</strong> - NESSUNA REGISTRAZIONE (sistema disattivato)</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>🧪 ANALISI TOSSICOLOGICA AGGIUNTIVA</h3>
+                <p><strong>Laboratorio:</strong> Forensics Teletubbyland</p>
+                <p><strong>Analista:</strong> Dr. Tubby Verde</p>
+                <div class="classified">
+                    Le analisi sul liquido rosso trovato sulla scena hanno rivelato una composizione insolita: 70% Tubby Custard alla fragola, 30% sangue tipo O-positivo (compatibile con la vittima).
+                </div>
+                <p><strong>Ulteriori risultati:</strong></p>
+                <ul>
+                    <li>Tracce di cera da candela trovate sui vestiti della vittima</li>
+                    <li>Fibre gialle (compatibili con costume da strega) sotto le unghie della vittima</li>
+                    <li>Residui di olio per lampade sulle mani di uno dei sospettati</li>
+                </ul>
+                <p class="timestamp">Referto completato: 1 Novembre, ore 02:15</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>📱 DATI TELEFONICI - CELLE AGGANCIATE</h3>
+                <p><strong>Fornitore:</strong> Teletubbyland Mobile Network</p>
+                <p><strong>Periodo analizzato:</strong> 31 Ottobre, 20:00 - 1 Novembre, 01:00</p>
+                <p><strong>Rilevamento posizioni tramite celle telefoniche:</strong></p>
+                <ul>
+                    <li><strong>Tinky Winky:</strong> Telefono spento dalle 22:25 alle 00:10</li>
+                    <li><strong>Dipsy:</strong> Telefono attivo tutta la sera, sempre nella stessa posizione (soggiorno)</li>
+                    <li><strong>Laa-Laa:</strong> Chiamata di 8 minuti alle 22:16 - cella agganciata: CORRIDOIO</li>
+                    <li><strong>Po:</strong> Nessuna attività telefonica dopo le 22:00</li>
+                    <li><strong>Baby Sun:</strong> Multipli tentativi di chiamata verso "Mamma Sun" alle 23:58 (non risponde)</li>
+                </ul>
+                <div class="classified">
+                    IMPORTANTE: Il telefono di Laa-Laa durante la chiamata delle 22:16 si trovava nelle immediate vicinanze della porta della cantina.
+                </div>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>🔍 OGGETTO MISTERIOSO</h3>
+                <p><strong>Ritrovamento:</strong> Durante seconda ispezione della scena</p>
+                <p><strong>Posizione:</strong> Nascosto dietro una zucca decorativa nel corridoio</p>
+                <div class="classified">
+                    È stato ritrovato un piccolo registratore vocale ancora acceso. Conteneva una registrazione parziale di una conversazione avvenuta intorno alle 23:50:
+                    <br><br>
+                    <em>"...non dovevi venire qui..."</em><br>
+                    <em>"Ma tu mi hai chiamato! Hai detto che dovevamo parlare!"</em><br>
+                    <em>"Io?! Io non ti ho chiamato! Qualcuno sta giocando con noi..."</em><br>
+                    <em>[Rumore di passi che si avvicinano]</em><br>
+                    <em>"Aspetta... chi c'è là?!"</em><br>
+                    <em>[RUMORE FORTE - Registrazione interrotta]</em>
+                </div>
+                <p><strong>Analisi vocale:</strong> Le voci appartengono a due dei presenti alla festa. Identificazione in corso.</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>📋 NOTA FINALE DEL DETECTIVE GALLO</h3>
+                <p style="color: #ff6b6b; font-style: italic;">
+                    "Cari detective, questi sono gli ultimi indizi digitali che ho raccolto per voi. 
+                    Insieme ai documenti fisici che avete ricevuto, ora possedete TUTTO ciò che serve per risolvere il caso.
+                    <br><br>
+                    Qualcuno ha mentito durante gli interrogatori. Qualcuno ha nascosto prove. Qualcuno ha ucciso a sangue freddo.
+                    <br><br>
+                    Sta a voi collegare i puntini. Fidatevi del vostro istinto investigativo.
+                    <br><br>
+                    La giustizia vi aspetta."
+                </p>
+                <p class="timestamp">- Detective Angelo Gallo, 1 Novembre 2025, ore 03:27</p>
+            </div>
+            
+            <div class="warning-banner">
+                🎃 BUONA FORTUNA, DETECTIVE 🎃<br>
+                Teletubbyland conta su di voi
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function login() {
+            const username = document.getElementById('username').value.toLowerCase().trim();
+            const password = document.getElementById('password').value.toLowerCase().trim();
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // Username: gallo
+            // Password: zucca (dalla poesia: "Quando la ZUCCA ride...")
+            
+            if (username === 'gallo' && password === 'zucca') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('contentSection').style.display = 'block';
+                window.scrollTo(0, 0);
+            } else {
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Permette login con tasto Invio
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+        
+        document.getElementById('username').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
