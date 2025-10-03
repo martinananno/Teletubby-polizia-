@@ -1,181 +1,300 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polizia Teletubbyland - Archivio Segreto</title>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background: #1f1f2e;
-        color: #f0f0f0;
-        margin: 0;
-        padding: 20px;
-    }
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    header h1 {
-        font-size: 2em;
-        color: #ff4d6d;
-    }
-    .login-section, .content-section {
-        background: #2c2c3c;
-        border-radius: 8px;
-        padding: 30px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        margin-bottom: 30px;
-    }
-    .input-group {
-        margin-bottom: 15px;
-    }
-    .input-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    .input-group input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #555;
-        background: #1f1f2e;
-        color: #f0f0f0;
-    }
-    .btn {
-        background: #ff4d6d;
-        color: #fff;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-    .btn:hover {
-        background: #ff6b81;
-    }
-    .error {
-        color: #ff6b6b;
-        margin-top: 10px;
-        display: none;
-    }
-    .collapsible {
-        background: #3a3a4d;
-        cursor: pointer;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background 0.3s;
-    }
-    .collapsible:hover {
-        background: #4d4d66;
-    }
-    .content {
-        padding: 10px 20px;
-        display: none;
-        background: #2c2c3c;
-        border-left: 3px solid #ff4d6d;
-        margin-bottom: 10px;
-        border-radius: 0 5px 5px 0;
-    }
-    .timestamp {
-        font-size: 0.85em;
-        color: #aaa;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polizia Teletubbyland - Archivio Segreto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(0,0,0,0.7);
+            border: 3px solid #e94560;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        .subtitle {
+            color: #ff6b6b;
+            font-size: 0.9em;
+        }
+
+        .login-section {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #e94560;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .login-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e94560;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #0f3460;
+            border: 2px solid #e94560;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+        }
+
+        .btn {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin-top: 15px;
+            color: #ff6b6b;
+            display: none;
+            border-radius: 5px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: #e94560;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: #ff6b6b;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border: 2px solid #e94560;
+            border-radius: 10px;
+        }
+
+        .tab-content h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .tab-content p, .tab-content ul {
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .classified {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid #e94560;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .warning-banner {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>🚨 Polizia di Teletubbyland 🚨</h1>
+            <p class="subtitle">Dipartimento Investigativo - Archivio Digitale Segreto</p>
+            <p class="subtitle">CASO #1031 - OMICIDIO HALLOWEEN</p>
+        </header>
 
-<div class="container">
-    <header>
-        <h1>🚨 Polizia Teletubbyland 🚨</h1>
-        <p>Archivio Digitale Segreto - Caso #1031</p>
-    </header>
+        <div id="loginSection" class="login-section">
+            <h2>🔐 ACCESSO RISERVATO</h2>
+            <div class="input-group">
+                <label for="username">USERNAME:</label>
+                <input type="text" id="username" placeholder="Inserisci username">
+            </div>
+            <div class="input-group">
+                <label for="password">PASSWORD:</label>
+                <input type="password" id="password" placeholder="Inserisci password">
+            </div>
+            <button class="btn" onclick="login()">ACCEDI ALL'ARCHIVIO</button>
+            <div id="errorMsg" class="error">❌ ACCESSO NEGATO - Credenziali non valide</div>
+        </div>
 
-    <!-- LOGIN -->
-    <div id="loginSection" class="login-section">
-        <h2>🔐 ACCESSO RISERVATO</h2>
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Inserisci username">
+        <div id="contentSection" class="content-section">
+            <div class="warning-banner">
+                ⚠️ ATTENZIONE: MATERIALE ALTAMENTE CONFIDENZIALE ⚠️
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn" onclick="openTab('video')">📹 Video Sorveglianza</button>
+                <button class="tab-btn" onclick="openTab('tossico')">🧪 Analisi Tossicologica</button>
+                <button class="tab-btn" onclick="openTab('telefono')">📱 Dati Telefonici</button>
+                <button class="tab-btn" onclick="openTab('oggetto')">🔍 Oggetto Misterioso</button>
+                <button class="tab-btn" onclick="openTab('nota')">📋 Nota Finale</button>
+            </div>
+
+            <div id="video" class="tab-content">
+                <h3>📹 Video Sorveglianza - Estratti</h3>
+                <p>Le telecamere hanno registrato tutto fino alle 22:30, quando qualcuno ha disattivato il sistema durante il "gioco al buio".</p>
+                <ul>
+                    <li>20:15 - Tutti gli invitati arrivano in costume</li>
+                    <li>20:47 - Po e Baby Sun litigano animatamente in cucina</li>
+                    <li>21:36 - Tinky Winky esce dalla stanza principale</li>
+                    <li>22:02 - Laa-Laa apre la porta della cantina</li>
+                    <li>22:29 - Ultima immagine: Tutti nel soggiorno, luci spente</li>
+                    <li>22:30 - 00:03 - Nessuna registrazione (sistema disattivato)</li>
+                </ul>
+            </div>
+
+            <div id="tossico" class="tab-content">
+                <h3>🧪 Analisi Tossicologica</h3>
+                <p>Tracce insolite di Tubby Custard alla fragola e sangue tipo O-positivo compatibile con la vittima.</p>
+                <ul>
+                    <li>Tracce di cera da candela sui vestiti</li>
+                    <li>Fibre gialle compatibili con costume da strega</li>
+                    <li>Residui di olio per lampade sulle mani di un sospettato</li>
+                </ul>
+                <p class="timestamp">Referto completato: 1 Novembre, ore 02:15</p>
+            </div>
+
+            <div id="telefono" class="tab-content">
+                <h3>📱 Dati Telefonici</h3>
+                <ul>
+                    <li>Tinky Winky: Telefono spento dalle 22:25 alle 00:10</li>
+                    <li>Dipsy: Telefono attivo tutta la sera, soggiorno</li>
+                    <li>Laa-Laa: Chiamata di 8 minuti alle 22:16, cella corridoio</li>
+                    <li>Po: Nessuna attività dopo le 22:00</li>
+                    <li>Baby Sun: Tentativi di chiamata alle 23:58</li>
+                </ul>
+            </div>
+
+            <div id="oggetto" class="tab-content">
+                <h3>🔍 Oggetto Misterioso</h3>
+                <p>Piccolo registratore vocale ancora acceso trovato dietro una zucca decorativa.</p>
+                <div class="classified">
+                    "Non dovevi venire qui..." - Registrazione parziale alle 23:50.
+                </div>
+            </div>
+
+            <div id="nota" class="tab-content">
+                <h3>📋 Nota Finale del Detective Gallo</h3>
+                <p class="classified">
+                    "Questi sono gli ultimi indizi digitali per risolvere il caso. Qualcuno ha mentito, nascosto prove, ucciso a sangue freddo. Fidatevi del vostro istinto investigativo."
+                </p>
+                <p class="timestamp">- Detective Angelo Gallo, 1 Novembre 2025, ore 03:27</p>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Inserisci password">
-        </div>
-        <button class="btn" onclick="login()">Accedi</button>
-        <div id="errorMsg" class="error">❌ Credenziali non valide</div>
     </div>
 
-    <!-- ARCHIVIO -->
-    <div id="contentSection" class="content-section" style="display:none;">
-        <div class="collapsible">📹 Video Sorveglianza - Estratti</div>
-        <div class="content">
-            <p>Le telecamere hanno registrato tutto fino alle 22:30...</p>
-            <p class="timestamp">31 Ottobre 2025</p>
-        </div>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value.toLowerCase().trim();
+            const password = document.getElementById('password').value.toLowerCase().trim();
+            const errorMsg = document.getElementById('errorMsg');
 
-        <div class="collapsible">🧪 Analisi Tossicologica</div>
-        <div class="content">
-            <p>Tracce insolite di Tubby Custard al 70%, sangue compatibile con la vittima.</p>
-            <p class="timestamp">Referto completato: 1 Novembre, ore 02:15</p>
-        </div>
+            if (username === 'gallo' && password === 'zucca') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('contentSection').style.display = 'block';
+                window.scrollTo(0,0);
+            } else {
+                errorMsg.style.display = 'block';
+                setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
+            }
+        }
 
-        <div class="collapsible">📱 Dati Telefonici</div>
-        <div class="content">
-            <p>Posizioni tramite celle telefoniche rilevate tra 20:00 e 01:00.</p>
-        </div>
+        function openTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(t => t.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
 
-        <div class="collapsible">🔍 Oggetto Misterioso</div>
-        <div class="content">
-            <p>Registratore vocale trovato dietro una zucca nel corridoio.</p>
-        </div>
-
-        <div class="collapsible">📋 Nota Finale Detective Gallo</div>
-        <div class="content">
-            <p>Questi sono gli ultimi indizi digitali. Fidatevi del vostro istinto investigativo.</p>
-            <p class="timestamp">1 Novembre 2025, ore 03:27</p>
-        </div>
-    </div>
-</div>
-
-<script>
-function login() {
-    const username = document.getElementById('username').value.toLowerCase().trim();
-    const password = document.getElementById('password').value.toLowerCase().trim();
-    const errorMsg = document.getElementById('errorMsg');
-
-    if(username === 'gallo' && password === 'zucca') {
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('contentSection').style.display = 'block';
-        window.scrollTo(0,0);
-    } else {
-        errorMsg.style.display = 'block';
-        setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
-    }
-}
-
-// Collapsible functionality
-document.querySelectorAll('.collapsible').forEach(button => {
-    button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    });
-});
-
-// Allow Enter key to submit login
-document.getElementById('password').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') login();
-});
-document.getElementById('username').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') login();
-});
-</script>
-
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+        document.getElementById('username').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+    </script>
 </body>
 </html>
