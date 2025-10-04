@@ -13,13 +13,10 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #000;
-            color: #fff;
+            background: #2b2b2b;
+            color: #e0e0e0;
             min-height: 100vh;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(30, 30, 80, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(60, 20, 60, 0.3) 0%, transparent 50%);
+            padding: 40px;
         }
         
         .stars {
@@ -63,33 +60,27 @@
             animation: eclipse 5s ease-in-out infinite;
         }
         
-        @keyframes eclipse {
-            0%, 100% { box-shadow: 0 0 50px rgba(100, 100, 150, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(150, 50, 50, 0.8); }
-        }
+
         
         header {
-            background: rgba(20, 20, 40, 0.9);
-            border: 3px solid #6a0dad;
-            padding: 30px;
+            background: #1f1f1f;
+            border-bottom: 2px solid #6a0dad;
+            padding: 25px;
             text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(106, 13, 173, 0.6);
+            border-radius: 8px;
+
         }
         
         header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #9d4edd;
-            text-shadow: 0 0 10px rgba(157, 78, 221, 0.8);
+            font-size: 2.2em;
+            letter-spacing: 1px;
+            color: #f0f0f0;
+            text-shadow: none;
         }
         
         .subtitle {
-            color: #c77dff;
+            color: #b0b0b0;
             font-size: 0.9em;
-            margin-top: 10px;
         }
         
         .login-section {
@@ -120,8 +111,8 @@
         .input-group input {
             width: 100%;
             padding: 12px;
-            background: #1a1a3e;
-            border: 2px solid #6a0dad;
+            background: #444;
+            border: 1px solid #666;
             color: #fff;
             font-family: 'Montserrat', sans-serif;
             font-size: 1em;
@@ -129,15 +120,15 @@
         
         .input-group input:focus {
             outline: none;
-            border-color: #9d4edd;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            border-color: #6a0dad;
+            box-shadow: 0 0 5px rgba(106, 13, 173, 0.5);
         }
         
         .btn {
-            background: linear-gradient(135deg, #6a0dad 0%, #9d4edd 100%);
+            background: #6a0dad;
             color: #fff;
             border: none;
-            padding: 15px 40px;
+            padding: 12px 30px;
             font-size: 1.1em;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -148,9 +139,9 @@
         }
         
         .btn:hover {
-            background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+            background: #9d4edd;
             box-shadow: 0 0 20px rgba(157, 78, 221, 0.8);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .error {
@@ -167,19 +158,18 @@
         }
         
         .evidence-card {
-            background: rgba(10, 10, 30, 0.95);
-            border: 2px solid #6a0dad;
-            padding: 25px;
+            background: #333;
+            border: 1px solid #555;
+            padding: 20px;
+            border-radius: 6px;
             margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(106, 13, 173, 0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         
         .evidence-card h3 {
-            color: #9d4edd;
-            margin-bottom: 15px;
+            color: #f0f0f0;
             font-size: 1.3em;
-            border-bottom: 2px solid #6a0dad;
-            padding-bottom: 10px;
+            border-bottom: none;
         }
         
         .evidence-card p {
@@ -213,10 +203,7 @@
             animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
+
         
         .timestamp {
             color: #888;
@@ -231,17 +218,14 @@
             animation: rotate 10s linear infinite;
         }
         
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+       
     </style>
 </head>
 <body>
-    <div class="stars" id="starField"></div>
+
     
     <div class="container">
-        <div class="moon"></div>
+
         
         <header>
             <h1> Archivio Polizia di Teletubbyland </h1>
@@ -250,7 +234,7 @@
         </header>
         
         <div id="loginSection" class="login-section">
-            <h2>Accesso riservato</h2>
+            <h2>ACCESSO RISERVATO</h2>
             <p style="color: #ddd; margin-bottom: 20px;">
                 Questo archivio contiene informazioni sensibili sul caso della Luna Nera.
                 L'accesso è consentito solo al Detective Gallo e ai consulenti autorizzati.
@@ -283,7 +267,7 @@
                 Contenuti relativi a omicidio rituale - Massima discrezione
             </div>
             
-            <div class="ritual-symbol">⭐</div>
+
             
             <div class="evidence-card">
                 <h3>🎥 RECUPERO VIDEO - Telecamera Nascosta nel Bosco</h3>
@@ -419,28 +403,14 @@
                 <p class="timestamp">- Detective Angelo Gallo, ore 04:10</p>
             </div>
             
-            <div class="warning-banner">
-                🌑 L'ECLISSI STA PER FINIRE 🌑<br>
-                La verità deve emergere prima dell'alba
-            </div>
+
         </div>
     </div>
     
     <script>
-        // Crea campo stellato
-        function createStars() {
-            const starField = document.getElementById('starField');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starField.appendChild(star);
-            }
-        }
+
         
-        createStars();
+
         
         function login() {
             const username = document.getElementById('username').value.toLowerCase().trim();
