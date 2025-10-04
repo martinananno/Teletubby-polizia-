@@ -3,297 +3,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polizia Teletubbyland - Archivio Segreto</title>
+    <title>Archivio Luna Nera - Polizia Teletubbyland</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Courier New', monospace;
+            background: #000;
             color: #fff;
             min-height: 100vh;
             padding: 20px;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(30, 30, 80, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(60, 20, 60, 0.3) 0%, transparent 50%);
         }
-
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
         .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
-
+        
+        .moon {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #333 0%, #000 70%);
+            border-radius: 50%;
+            margin: 20px auto;
+            box-shadow: 0 0 50px rgba(100, 100, 150, 0.5);
+            animation: eclipse 5s ease-in-out infinite;
+        }
+        
+        @keyframes eclipse {
+            0%, 100% { box-shadow: 0 0 50px rgba(100, 100, 150, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(150, 50, 50, 0.8); }
+        }
+        
         header {
-            background: rgba(0,0,0,0.7);
-            border: 3px solid #e94560;
+            background: rgba(20, 20, 40, 0.9);
+            border: 3px solid #6a0dad;
             padding: 30px;
             text-align: center;
             margin-bottom: 30px;
-            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(106, 13, 173, 0.6);
         }
-
+        
         header h1 {
             font-size: 2em;
             margin-bottom: 10px;
-            color: #ff6b6b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #9d4edd;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.8);
         }
-
+        
         .subtitle {
-            color: #ff6b6b;
+            color: #c77dff;
             font-size: 0.9em;
+            margin-top: 10px;
         }
-
+        
         .login-section {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid #e94560;
+            background: rgba(10, 10, 30, 0.95);
+            border: 2px solid #6a0dad;
             padding: 40px;
             margin-bottom: 30px;
-            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(106, 13, 173, 0.4);
         }
-
+        
         .login-section h2 {
-            color: #ff6b6b;
+            color: #9d4edd;
             margin-bottom: 20px;
             font-size: 1.5em;
         }
-
+        
         .input-group {
             margin-bottom: 20px;
         }
-
+        
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            color: #e94560;
+            color: #c77dff;
             font-weight: bold;
         }
-
+        
         .input-group input {
             width: 100%;
             padding: 12px;
-            background: #0f3460;
-            border: 2px solid #e94560;
+            background: #1a1a3e;
+            border: 2px solid #6a0dad;
             color: #fff;
+            font-family: 'Courier New', monospace;
             font-size: 1em;
         }
-
+        
         .input-group input:focus {
             outline: none;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+            border-color: #9d4edd;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
         }
-
+        
         .btn {
-            background: #e94560;
+            background: linear-gradient(135deg, #6a0dad 0%, #9d4edd 100%);
             color: #fff;
             border: none;
             padding: 15px 40px;
             font-size: 1.1em;
             cursor: pointer;
+            font-family: 'Courier New', monospace;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             transition: all 0.3s;
-            border-radius: 5px;
         }
-
+        
         .btn:hover {
-            background: #ff6b6b;
+            background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.8);
             transform: scale(1.05);
         }
-
+        
         .error {
-            background: rgba(255, 0, 0, 0.2);
-            border: 2px solid #ff0000;
+            background: rgba(139, 0, 0, 0.3);
+            border: 2px solid #8b0000;
             padding: 15px;
             margin-top: 15px;
             color: #ff6b6b;
             display: none;
-            border-radius: 5px;
         }
-
+        
         .content-section {
             display: none;
         }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
+        
+        .evidence-card {
+            background: rgba(10, 10, 30, 0.95);
+            border: 2px solid #6a0dad;
+            padding: 25px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            box-shadow: 0 0 15px rgba(106, 13, 173, 0.3);
         }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background: #e94560;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .tab-btn:hover {
-            background: #ff6b6b;
-        }
-
-        .tab-content {
-            display: none;
-            background: rgba(0,0,0,0.8);
-            padding: 20px;
-            border: 2px solid #e94560;
-            border-radius: 10px;
-        }
-
-        .tab-content h3 {
-            color: #ff6b6b;
+        
+        .evidence-card h3 {
+            color: #9d4edd;
             margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #6a0dad;
+            padding-bottom: 10px;
         }
-
-        .tab-content p, .tab-content ul {
+        
+        .evidence-card p {
             line-height: 1.6;
             color: #ddd;
         }
-
+        
+        .evidence-card ul {
+            margin-left: 20px;
+            color: #ddd;
+        }
+        
+        .evidence-card li {
+            margin-bottom: 8px;
+        }
+        
         .classified {
-            background: rgba(233, 69, 96, 0.1);
-            border-left: 4px solid #e94560;
-            padding: 10px;
+            background: rgba(106, 13, 173, 0.1);
+            border-left: 4px solid #9d4edd;
+            padding: 15px;
             margin: 15px 0;
             font-style: italic;
         }
-
+        
         .warning-banner {
-            background: rgba(255, 107, 107, 0.2);
-            border: 2px solid #ff6b6b;
+            background: rgba(139, 0, 0, 0.3);
+            border: 2px solid #8b0000;
             padding: 15px;
             margin-bottom: 30px;
             text-align: center;
-            border-radius: 5px;
+            animation: pulse 2s infinite;
         }
-
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
         .timestamp {
             color: #888;
             font-size: 0.9em;
             margin-top: 10px;
         }
+        
+        .ritual-symbol {
+            text-align: center;
+            font-size: 3em;
+            margin: 20px 0;
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <div class="stars" id="starField"></div>
+    
     <div class="container">
+        <div class="moon"></div>
+        
         <header>
-            <h1>🚨 Polizia di Teletubbyland 🚨</h1>
-            <p class="subtitle">Dipartimento Investigativo - Archivio Digitale Segreto</p>
-            <p class="subtitle">CASO #1031 - OMICIDIO HALLOWEEN</p>
+            <h1>🌑 ARCHIVIO LUNA NERA 🌑</h1>
+            <p class="subtitle">Polizia di Teletubbyland - Caso #1101</p>
+            <p class="subtitle">CLASSIFICAZIONE: MASSIMO SEGRETO</p>
         </header>
-
+        
         <div id="loginSection" class="login-section">
-            <h2>🔐 ACCESSO RISERVATO</h2>
+            <h2>🔐 ACCESSO ULTRA RISERVATO</h2>
+            <p style="color: #ddd; margin-bottom: 20px;">
+                Questo archivio contiene informazioni sensibili sul caso della Luna Nera.
+                L'accesso è consentito solo al Detective Gallo e ai consulenti autorizzati.
+            </p>
+            
             <div class="input-group">
                 <label for="username">USERNAME:</label>
                 <input type="text" id="username" placeholder="Inserisci username">
             </div>
+            
             <div class="input-group">
                 <label for="password">PASSWORD:</label>
-                <input type="password" id="password" placeholder="Inserisci password">
+                <input type="password" id="password" placeholder="Parola nascosta nella filastrocca">
             </div>
-            <button class="btn" onclick="login()">ACCEDI ALL'ARCHIVIO</button>
-            <div id="errorMsg" class="error">❌ ACCESSO NEGATO - Credenziali non valide</div>
+            
+            <button class="btn" onclick="login()">ACCEDI AI DOCUMENTI</button>
+            
+            <div id="errorMsg" class="error">
+                ❌ ACCESSO NEGATO - Credenziali errate
+            </div>
+            
+            <p class="timestamp" style="margin-top: 20px;">
+                💡 SUGGERIMENTO: "La parola è scritta nelle stelle, ma si pronuncia guardando in basso"
+            </p>
         </div>
-
+        
         <div id="contentSection" class="content-section">
             <div class="warning-banner">
-                ⚠️ ATTENZIONE: MATERIALE ALTAMENTE CONFIDENZIALE ⚠️
+                ⚠️ MATERIALE ALTAMENTE DISTURBANTE ⚠️<br>
+                Contenuti relativi a omicidio rituale - Massima discrezione
             </div>
-
-            <div class="tabs">
-                <button class="tab-btn" onclick="openTab('video')">📹 Video Sorveglianza</button>
-                <button class="tab-btn" onclick="openTab('tossico')">🧪 Analisi Tossicologica</button>
-                <button class="tab-btn" onclick="openTab('telefono')">📱 Dati Telefonici</button>
-                <button class="tab-btn" onclick="openTab('oggetto')">🔍 Oggetto Misterioso</button>
-                <button class="tab-btn" onclick="openTab('nota')">📋 Nota Finale</button>
-            </div>
-
-            <div id="video" class="tab-content">
-                <h3>📹 Video Sorveglianza - Estratti</h3>
-                <p>Le telecamere hanno registrato tutto fino alle 22:30, quando qualcuno ha disattivato il sistema durante il "gioco al buio".</p>
-                <ul>
-                    <li>20:15 - Tutti gli invitati arrivano in costume</li>
-                    <li>20:47 - Po e Baby Sun litigano animatamente in cucina</li>
-                    <li>21:36 - Tinky Winky esce dalla stanza principale</li>
-                    <li>22:02 - Laa-Laa apre la porta della cantina</li>
-                    <li>22:29 - Ultima immagine: Tutti nel soggiorno, luci spente</li>
-                    <li>22:30 - 00:03 - Nessuna registrazione (sistema disattivato)</li>
-                </ul>
-            </div>
-
-            <div id="tossico" class="tab-content">
-                <h3>🧪 Analisi Tossicologica</h3>
-                <p>Tracce insolite di Tubby Custard alla fragola e sangue tipo O-positivo compatibile con la vittima.</p>
-                <ul>
-                    <li>Tracce di cera da candela sui vestiti</li>
-                    <li>Fibre gialle compatibili con costume da strega</li>
-                    <li>Residui di olio per lampade sulle mani di un sospettato</li>
-                </ul>
-                <p class="timestamp">Referto completato: 1 Novembre, ore 02:15</p>
-            </div>
-
-            <div id="telefono" class="tab-content">
-                <h3>📱 Dati Telefonici</h3>
-                <ul>
-                    <li>Tinky Winky: Telefono spento dalle 22:25 alle 00:10</li>
-                    <li>Dipsy: Telefono attivo tutta la sera, soggiorno</li>
-                    <li>Laa-Laa: Chiamata di 8 minuti alle 22:16, cella corridoio</li>
-                    <li>Po: Nessuna attività dopo le 22:00</li>
-                    <li>Baby Sun: Tentativi di chiamata alle 23:58</li>
-                </ul>
-            </div>
-
-            <div id="oggetto" class="tab-content">
-                <h3>🔍 Oggetto Misterioso</h3>
-                <p>Piccolo registratore vocale ancora acceso trovato dietro una zucca decorativa.</p>
+            
+            <div class="ritual-symbol">⭐</div>
+            
+            <div class="evidence-card">
+                <h3>🎥 RECUPERO VIDEO - Telecamera Nascosta nel Bosco</h3>
+                <p><strong>Fonte:</strong> Telecamera di sorveglianza wildlife</p>
+                <p><strong>Posizione:</strong> Albero a 10 metri dalla radura</p>
                 <div class="classified">
-                    "Non dovevi venire qui..." - Registrazione parziale alle 23:50.
+                    <strong>SCOPERTA CRUCIALE:</strong> Una telecamera per monitoraggio animali era attiva nel bosco. Ha registrato video a infrarossi durante l'eclissi.
                 </div>
+                <p><strong>Sequenze registrate:</strong></p>
+                <ul>
+                    <li><strong>23:28</strong> - 6 figure in costume entrano nella radura</li>
+                    <li><strong>23:30</strong> - Si dispongono in cerchio, accendono candele</li>
+                    <li><strong>23:55</strong> - Una figura lascia il cerchio, va al centro</li>
+                    <li><strong>23:58</strong> - Una SECONDA figura segue la prima</li>
+                    <li><strong>00:00</strong> - Eclissi totale - immagini molto scure</li>
+                    <li><strong>00:01</strong> - Si intravede movimento brusco al centro</li>
+                    <li><strong>00:03</strong> - Tutte le figure corrono verso il centro</li>
+                </ul>
+                <p><strong>NOTA TECNICA:</strong> Le figure non sono identificabili nei costumi, MA una telecamera ha tracce termiche che mostrano due corpi molto vicini al centro tra le 00:00 e 00:02.</p>
             </div>
-
-            <div id="nota" class="tab-content">
-                <h3>📋 Nota Finale del Detective Gallo</h3>
-                <p class="classified">
-                    "Questi sono gli ultimi indizi digitali per risolvere il caso. Qualcuno ha mentito, nascosto prove, ucciso a sangue freddo. Fidatevi del vostro istinto investigativo."
+            
+            <div class="evidence-card">
+                <h3>📞 TABULATI TELEFONICI COMPLETI</h3>
+                <p><strong>Operatore:</strong> Teletubbyland Network</p>
+                <p><strong>Periodo:</strong> 31 Ottobre, 20:00 - 1 Novembre, 01:00</p>
+                <div class="classified">
+                    Analisi celle telefoniche e attività dei dispositivi nella zona del bosco.
+                </div>
+                <p><strong>Attività rilevante:</strong></p>
+                <ul>
+                    <li><strong>Tinky Winky:</strong> Telefono SPENTO dalle 23:20. Riacceso alle 00:06</li>
+                    <li><strong>Dipsy:</strong> 3 chiamate perse da "Mamma" tra 23:50-00:05 (non risponde)</li>
+                    <li><strong>Laa-Laa:</strong> Invia SMS alle 23:55: "Scusa per tutto. Addio."</li>
+                    <li><strong>Po:</strong> Ricerca Google alle 23:45: "come confessare omicidio dopo anni"</li>
+                    <li><strong>Noo-Noo:</strong> Registra audio 23:50-00:03 (file recuperabile?)</li>
+                    <li><strong>Baby Sun:</strong> GPS mostra spostamento verso casa alle 00:01 (prima del ritrovamento!)</li>
+                </ul>
+                <p class="timestamp">⚠️ ANOMALIA: Baby Sun si è allontanato PRIMA che il corpo fosse scoperto</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>🧬 DNA E TRACCE BIOLOGICHE - Analisi Completa</h3>
+                <p><strong>Laboratorio:</strong> Unità Forense Avanzata</p>
+                <p><strong>Analista Capo:</strong> Dr. Tubby Bianco</p>
+                <div class="classified">
+                    Sono state trovate tracce biologiche multiple sulla vittima e nell'area circostante.
+                </div>
+                <p><strong>Risultati chiave:</strong></p>
+                <ul>
+                    <li><strong>Sotto unghie vittima:</strong> DNA di Dipsy (fibre verdi + pelle)</li>
+                    <li><strong>Sul collo vittima:</strong> Impronte digitali parziali (2 persone diverse)</li>
+                    <li><strong>Sulla pietra:</strong> DNA vittima + tracce pulite (guanti?)</li>
+                    <li><strong>Tessuto strappato:</strong> Appartiene sicuramente al mantello di Dipsy</li>
+                    <li><strong>Sangue a terra:</strong> Solo della vittima (no altre ferite su altri)</li>
+                </ul>
+                <p><strong>ELEMENTO CRUCIALE:</strong> Sulle mani della vittima sono state trovate tracce di CERA DORATA, identica alla maschera di Baby Sun.</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>📱 RECUPERO DATI - File Audio di Noo-Noo</h3>
+                <p><strong>Dispositivo:</strong> Registratore interno Noo-Noo</p>
+                <p><strong>Durata:</strong> 13 minuti (23:50 - 00:03)</p>
+                <div class="classified">
+                    Noo-Noo aveva attivato una registrazione automatica. Il file è stato recuperato dalla memoria interna.
+                </div>
+                <p><strong>Trascrizione audio completa:</strong></p>
+                <ul>
+                    <li><strong>23:50</strong> - Voce 1: "Dove vai?" / Voce 2: "Devo parlare con lui"</li>
+                    <li><strong>23:55</strong> - Voce 3 (al centro): "Sei venuto. Bene. Parliamo."</li>
+                    <li><strong>23:57</strong> - Voce 4: "Non puoi farlo. Rovinerai tutto!"</li>
+                    <li><strong>23:59</strong> - Suoni di colluttazione. Voce 3: "Lasciami! Io—"</li>
+                    <li><strong>00:00</strong> - COLPO SECCO. Gemito di dolore.</li>
+                    <li><strong>00:01</strong> - Respiro affannoso. Voce 4: "Dovevi tacere... dovevi..."</li>
+                    <li><strong>00:02</strong> - Suoni di soffocamento. Voce 3 gorgoglia.</li>
+                    <li><strong>00:03</strong> - Silenzio. Poi: Voce 5 urla "NOO!"</li>
+                </ul>
+                <p><strong>ANALISI VOCALE:</strong> Le voci sono state identificate tramite software di riconoscimento. Risultati disponibili su richiesta diretta al Detective Gallo.</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>📄 DOCUMENTO SEGRETO - Patto di Sangue (2015)</h3>
+                <p><strong>Ritrovato:</strong> Nascosto nell'ultimo albero della radura</p>
+                <p><strong>Condizione:</strong> Vecchio, macchiato, piegato</p>
+                <div class="classified">
+                    Un documento firmato da tutti e 6 i presenti 10 anni fa. Un vero e proprio patto.
+                </div>
+                <p><strong>Testo del patto:</strong></p>
+                <p style="font-style: italic; background: rgba(139,0,0,0.1); padding: 10px; margin: 10px 0;">
+                    "Noi sottoscritti giuriamo solennemente che quanto accaduto al Lago Oscuro 
+                    nella notte del 31 Ottobre 2015 rimarrà per sempre segreto.
+                    <br><br>
+                    ████████ è morto per incidente. Nessuno lo ha spinto. Nessuno è colpevole.
+                    <br><br>
+                    Chi romperà questo patto, pagherà con la vita durante la prossima Luna Nera.
+                    <br><br>
+                    Firmato col sangue:"
                 </p>
-                <p class="timestamp">- Detective Angelo Gallo, 1 Novembre 2025, ore 03:27</p>
+                <p><strong>Firme presenti (in ordine):</strong></p>
+                <ul>
+                    <li>Tinky Winky</li>
+                    <li>Dipsy</li>
+                    <li>Laa-Laa</li>
+                    <li>Po</li>
+                    <li>Noo-Noo</li>
+                    <li>Baby Sun</li>
+                </ul>
+                <p style="color: #ff6b6b;"><strong>Sul retro, aggiunto recentemente:</strong> "Il patto è rotto. Qualcuno deve pagare. Ci vediamo alla Luna Nera. - ???"</p>
+            </div>
+            
+            <div class="evidence-card">
+                <h3>🔍 NOTA FINALE - Detective Angelo Gallo</h3>
+                <div class="ritual-symbol" style="font-size: 2em;">🌙</div>
+                <p style="color: #c77dff; font-style: italic;">
+                    "Detective, avete ora tutti i pezzi del puzzle.
+                    <br><br>
+                    10 anni fa, sei amici hanno fatto un patto. Uno di loro ha ucciso qualcuno e gli altri hanno coperto il crimine.
+                    <br><br>
+                    Stanotte, qualcuno ha deciso di rompere il patto e confessare tutto. E qualcun altro ha deciso di fermarlo... per sempre.
+                    <br><br>
+                    Le testimonianze sono contraddittorie. I DNA sono confusi. Le voci registrate sono multiple.
+                    <br><br>
+                    Ma la verità è una sola. E voi dovete trovarla.
+                    <br><br>
+                    Chi ha colpito per primo?<br>
+                    Chi ha finito il lavoro?<br>
+                    Chi sta mentendo?<br>
+                    Chi sta proteggendo chi?
+                    <br><br>
+                    La Luna Nera sta per tramontare. Il tempo stringe.
+                    <br><br>
+                    Fate giustizia per entrambe le vittime: quella di 10 anni fa, e quella di stanotte."
+                </p>
+                <p class="timestamp">- Detective Angelo Gallo, ore 04:10</p>
+            </div>
+            
+            <div class="warning-banner">
+                🌑 L'ECLISSI STA PER FINIRE 🌑<br>
+                La verità deve emergere prima dell'alba
             </div>
         </div>
     </div>
-
+    
     <script>
+        // Crea campo stellato
+        function createStars() {
+            const starField = document.getElementById('starField');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starField.appendChild(star);
+            }
+        }
+        
+        createStars();
+        
         function login() {
             const username = document.getElementById('username').value.toLowerCase().trim();
             const password = document.getElementById('password').value.toLowerCase().trim();
             const errorMsg = document.getElementById('errorMsg');
-
-            if (username === 'gallo' && password === 'zucca') {
+            
+            // Credenziali attese:
+            // Username: gallo
+            // Password: terra (nella filastrocca: "scritta nelle stelle, ma si pronuncia guardando in basso" = terra)
+            
+            if (username === 'gallo' && password === 'terra') {
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('contentSection').style.display = 'block';
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             } else {
                 errorMsg.style.display = 'block';
-                setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
             }
         }
-
-        function openTab(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(t => t.style.display = 'none');
-            document.getElementById(tabId).style.display = 'block';
-        }
-
+        
+        // Invia con Enter
         document.getElementById('password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
+            if (e.key === 'Enter') {
+                login();
+            }
         });
+        
         document.getElementById('username').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
+            if (e.key === 'Enter') {
+                login();
+            }
         });
     </script>
 </body>
